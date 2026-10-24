@@ -10,5 +10,11 @@ from django.forms import CharField
 class Author(models.Model):
     name = models.CharField(max_length=100, default="a")
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
 class Book(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
+    category = models.ManyToManyField(Category, related_name='books')
+    price = models.FloatField()
